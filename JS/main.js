@@ -21,11 +21,12 @@ class Createbase {
 class View {
     constructor(controller){
         this.controller = controller
+        this.model = model
     }
     
     build(){
         //instance that creates background container row and col
-        var basecontainer = new Createbase('div','container bg-dark text-center text-white rounded','','min-height: 80vh; max-width: 25rem')
+        var basecontainer = new Createbase('div','container bg-dark text-center text-white rounded','','min-height: 80vh; max-width: 25rem','maincontainer')
         var baserow1 = new Createbase('div','row','','','baserow1')
         var baserow2 = new Createbase('div','row','','min-height: 30rem','baserow2')
         var basecol1 = new Createbase('div','col-12 mx-auto')
@@ -54,8 +55,8 @@ class View {
         // var numcontainer = new Createbase('div','container bg-white text-right rounded mx-auto my-3 p-1','','height: 60vh;')
         // var opercontainer = new Createbase('div','container bg-white text-right rounded mx-auto my-3 p-1','','height: 60vh;')
         
-        var numrow = new Createbase('div','row d-flex flex-sm-row-reverse bg-dark text-dark w-100 ml-1','','min-height: 32rem; margin-left: 1px;','numrow')
-        var operow = new Createbase('div','row d-flex flex-column bg-dark text-dark h-100 w-100','','','operow')
+        var numrow = new Createbase('div','row d-flex flex-sm-row-reverse text-dark w-100 ml-1','','min-height: 32rem; margin-left: 1px;','numrow')
+        var operow = new Createbase('div','row d-flex flex-column text-dark h-100 w-100','','','operow')
         
         var operarr1 = [".","="];
         var operarr2 = ["AC","+","-","x","/"];
@@ -63,22 +64,22 @@ class View {
         //numbers
         
         for(let i = 9; i >= 0; i--){
-            var numcols =  new Createbase('button','btn col-4 bg-white rounded-circle m-2',`${i}`,'max-width: 75px; max-height: 80px;',`${i}`)
-            // numcols.element.onclick = this.clicky.bind(this.controller)
+            var numcols =  new Createbase('button','btn col-4 bg-white border-dark rounded-circle m-2',`${i}`,'max-width: 75px; max-height: 80px;',`${i}`)
+            // numcols.element.onclick = this.controller.clicky.bind(this)
             numrow.element.appendChild(numcols.element)
 
         }
         //operators
         for(let i = 0; i < operarr1.length; i++){
-            var numoper1 =  new Createbase('button','btn col-4 bg-white rounded-circle m-2',`${operarr1[i]}`,'max-width: 75px; max-height: 80px;',`${operarr1[i]}`)
-            // numoper1.element.onclick = this.controller.bind(this.clicky)
+            var numoper1 =  new Createbase('button','btn col-4 bg-white border-dark rounded-circle m-2',`${operarr1[i]}`,'max-width: 75px; max-height: 80px;',`${operarr1[i]}`)
+            // numoper1.element.onclick = this.controller.clicky.bind(this)     
             numrow.element.appendChild(numoper1.element)
             
 
         }
         // operators: . = 
         for(let i = 0; i < operarr2.length; i++){
-            var numoper2 =  new Createbase('button','btn col-4 bg-white rounded-circle m-2',`${operarr2[i]}`,'max-width: 75px; max-height: 80px;',`${operarr2[i]}`)
+            var numoper2 =  new Createbase('button','btn col-4 bg-white border-dark rounded-circle m-2',`${operarr2[i]}`,'max-width: 75px; max-height: 80px;',`${operarr2[i]}`)
             // numoper2.element.onclick = this.controller.clicky.bind(this)
             operow.element.appendChild(numoper2.element)
         }
@@ -109,25 +110,30 @@ class View {
 
 //event controller
 class Controller{
-    constructor(model){
-        this.model = model
-        this.current = 0;
+    constructor(view){
+        this.view = view
+        // this.click = view.numcols.element.onclick
+        // this.view.numcols.onclick = this.clicky.bind(this)
+        // this.current = 0;
+        // this.view.element.onclick = this.clicky.bind(this)
     }
 
-    clicky(e){
-        this.model.updatescreen(e);
+    clicky(){
+        // this.model.updatescreen(e);
+        console.log(this)
     }
 
 }
 
 //state and storage iterator
 class Model {
-    constructor(view){
+    constructor(view,controller){
         this.view = view
+        this.controller = controller
         this.input= ""
     }
-    updatescreen(e){
-        console.log(e.target.textContent)
+    updatescreen(){
+        // console.log(this)
 
     }
 

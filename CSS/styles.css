@@ -10,3 +10,8 @@ html, body, #app{
 .btn:focus{
     outline: none;
 }
+
+#maincontainer {
+    background-image: url(/darkOcean.jpeg);
+    background-size: cover;
+}
