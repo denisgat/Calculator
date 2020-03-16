@@ -19,14 +19,14 @@ class Createbase {
 
 
 class View {
-    constructor(controller){
-        this.controller = controller
+    constructor(model){
         this.model = model
+        this.numbers = []
     }
     
     build(){
         //instance that creates background container row and col
-        var basecontainer = new Createbase('div','container bg-dark text-center text-white rounded','','min-height: 80vh; max-width: 25rem','maincontainer')
+        var basecontainer = new Createbase('div','container bg-dark text-center text-white rounded','','max-height: 46rem, min-height: inherit; max-width: 26rem','maincontainer')
         var baserow1 = new Createbase('div','row','','','baserow1')
         var baserow2 = new Createbase('div','row','','min-height: 30rem','baserow2')
         var basecol1 = new Createbase('div','col-12 mx-auto')
@@ -65,14 +65,15 @@ class View {
         
         for(let i = 9; i >= 0; i--){
             var numcols =  new Createbase('button','btn col-4 bg-white border-dark rounded-circle m-2',`${i}`,'max-width: 75px; max-height: 80px;',`${i}`)
-            // numcols.element.onclick = this.controller.clicky.bind(this)
+            numcols.element.onclick = this.model.controller.clicky.bind(this)
+            this.numbers.push(numcols);
             numrow.element.appendChild(numcols.element)
 
         }
         //operators
         for(let i = 0; i < operarr1.length; i++){
             var numoper1 =  new Createbase('button','btn col-4 bg-white border-dark rounded-circle m-2',`${operarr1[i]}`,'max-width: 75px; max-height: 80px;',`${operarr1[i]}`)
-            // numoper1.element.onclick = this.controller.clicky.bind(this)     
+            numoper1.element.onclick = this.model.controller.clicky.bind(this)     
             numrow.element.appendChild(numoper1.element)
             
 
@@ -80,7 +81,7 @@ class View {
         // operators: . = 
         for(let i = 0; i < operarr2.length; i++){
             var numoper2 =  new Createbase('button','btn col-4 bg-white border-dark rounded-circle m-2',`${operarr2[i]}`,'max-width: 75px; max-height: 80px;',`${operarr2[i]}`)
-            // numoper2.element.onclick = this.controller.clicky.bind(this)
+            numoper2.element.onclick = this.model.controller.clicky.bind(this)
             operow.element.appendChild(numoper2.element)
         }
         
@@ -102,7 +103,6 @@ class View {
     }
 
     updateview(){
-        this.controller.model = current
     }
 
 
@@ -112,29 +112,26 @@ class View {
 class Controller{
     constructor(view){
         this.view = view
-        // this.click = view.numcols.element.onclick
-        // this.view.numcols.onclick = this.clicky.bind(this)
-        // this.current = 0;
-        // this.view.element.onclick = this.clicky.bind(this)
     }
 
     clicky(){
-        // this.model.updatescreen(e);
-        console.log(this)
+        console.log(this.numbers)
+        // this.model.updatestore(view.build.numcols.element.id);
     }
 
 }
 
 //state and storage iterator
 class Model {
-    constructor(view,controller){
-        this.view = view
-        this.controller = controller
-        this.input= ""
+    constructor(){
+        this.store= ""
+        this.controller = null
     }
-    updatescreen(){
-        // console.log(this)
-
+    setController(controller){
+        this.controller = controller
+    }
+    updatestore(){
+        // store = this.
     }
 
 }
@@ -142,14 +139,13 @@ class Model {
 
 //-------------------------------------------Instances----------------------------------------------------\\
 
-var view = new View();
-var controller = new Controller();
 var model = new Model();
+var view = new View(model);
+var controller = new Controller(view);
 
-
+model.setController(controller);
 view.build();
-controller.clicky();
-model.updatescreen();
+console.log(view)
 
 
 
