@@ -30,7 +30,7 @@ class View {
         var baserow2 = new Createbase('div','row','','min-height: 30rem','baserow2')
         var basecol1 = new Createbase('div','col-12 mx-auto')
         var basecol2 = new Createbase('div','col-9 p-1','','','basecol2')
-        var basecol3 = new Createbase('div','col-3 p-1','','','basecol3')
+        var basecol3 = new Createbase('div','col-3 pl-3 pr-0 pt-1','','','basecol3')
         // var basetext = new Createbase('p','','BASE CONTAINER')
         
         //instance to create display for calculated values
@@ -64,14 +64,14 @@ class View {
         
         for(let i = 9; i >= 0; i--){
             var numcols =  new Createbase('button','btn col-4 bg-white rounded-circle m-2',`${i}`,'max-width: 75px; max-height: 80px;',`${i}`)
-            numoper1.element.onclick = this.controller.clicky.bind(this.controller)
+            // numcols.element.onclick = this.clicky.bind(this.controller)
             numrow.element.appendChild(numcols.element)
 
         }
         //operators
         for(let i = 0; i < operarr1.length; i++){
             var numoper1 =  new Createbase('button','btn col-4 bg-white rounded-circle m-2',`${operarr1[i]}`,'max-width: 75px; max-height: 80px;',`${operarr1[i]}`)
-            numoper1.element.onclick = this.controller.clicky.bind(this.controller)
+            // numoper1.element.onclick = this.controller.bind(this.clicky)
             numrow.element.appendChild(numoper1.element)
             
 
@@ -79,8 +79,8 @@ class View {
         // operators: . = 
         for(let i = 0; i < operarr2.length; i++){
             var numoper2 =  new Createbase('button','btn col-4 bg-white rounded-circle m-2',`${operarr2[i]}`,'max-width: 75px; max-height: 80px;',`${operarr2[i]}`)
+            // numoper2.element.onclick = this.controller.clicky.bind(this)
             operow.element.appendChild(numoper2.element)
-            numoper2.element.onclick = this.controller.clicky.bind(this.controller)
         }
         
         basecol2.element.appendChild(numrow.element)
@@ -124,7 +124,7 @@ class Controller{
 class Model {
     constructor(view){
         this.view = view
-        this.input=""
+        this.input= ""
     }
     updatescreen(e){
         console.log(e.target.textContent)
@@ -138,10 +138,13 @@ class Model {
 
 var view = new View();
 var controller = new Controller();
-var Model = new Model();
+var model = new Model();
 
 
 view.build();
+controller.clicky();
+model.updatescreen();
+
 
 
 
